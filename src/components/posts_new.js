@@ -9,7 +9,7 @@ class PostsNew extends Component {
       // same as const titile = this.props.fields.title;
       return (
         // the handleSubmit needs an action creator
-        <form onSubmit={ handleSubmit }>
+        <form onSubmit={ handleSubmit(this.props.createPost) }>
           <h3>Create a new Post</h3>
           <div className="form-group">
             <label>Title</label>
@@ -17,6 +17,9 @@ class PostsNew extends Component {
               // destructuring
               {...title}
               />
+              <div className="text-help">
+                {title.touched ? title.error: ''}
+              </div>
           </div>
           <div className="form-group">
             <label>Categories</label>
@@ -36,14 +39,28 @@ class PostsNew extends Component {
       );
     }
 }
+// Validation part
+function validate(values) {
+  const errors = {};
+  if (!values.title) {
+    errors.title = "Enter a username";
+  }
+  return errors;
+}
 
 // export default PostsNew;
+
+// connect: first argument is mapStateToProps, 2nd is mapDispatchToProps
+//  reduxForm: 1st is form config, 2nd is mapStateToProps, 3rd is mapDispatchToProps
+
 export default reduxForm({
   // We are telling redux that we just created a form named PostsNewForm
   form: 'PostsNewForm',
   // tells redux to watch for those inputs
-  fields: ['title', 'categories', 'content']
-}) (PostsNew);
+  fields: ['title', 'categories', 'content'],
+  // function above
+  validate
+}, null, { createPost }) (PostsNew);
 
 // So it will look like that:
 // state === {
