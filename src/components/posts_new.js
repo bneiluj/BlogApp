@@ -14,7 +14,13 @@ class PostsNew extends Component {
     };
 
     onSubmit(props) {
-      this.props.createPost(props);
+      this.props.createPost(props); //we can then use a chaining on the promise
+        .then(() => {
+          // Blog post has been created, navigate the user to the index
+          // We navigate by calling this.context.router.push with the
+          // new path to navigate to.
+          this.context.router.push('/');
+        })
     }
     render() {
       const { fields: {title, categories, content }, handleSubmit } = this.props;
@@ -24,7 +30,7 @@ class PostsNew extends Component {
         // the handleSubmit needs an action creator
         // <form onSubmit={ handleSubmit(this.props.createPost) }>
         // need to bind the context
-        // the bind(this) means it will pass properties from the form 
+        // the bind(this) means it will pass properties from the form
         <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
           <h3>Create a new Post</h3>
           <div className={`form-group ${title.touched && title.invalid ? 'has-danger' : ''}`}>
