@@ -15,6 +15,7 @@ class PostsIndex extends Component {
   // It's the best place to fecth data
   componentWillMount() {
     console.log("Call action creator to fetch posts");
+    // Action creator to fetch all posts
     this.props.fetchPosts(); // we can call fetchPosts before of the connect
   }
 
@@ -51,6 +52,8 @@ class PostsIndex extends Component {
 
 // We need to display all the posts
 function mapDispatchToProps(state) {
+  // It will map our states to our props
+  // our posts are avaiable on our state through the state.props
   return { posts: state.posts.all };
 }
 // export default PostsIndex;

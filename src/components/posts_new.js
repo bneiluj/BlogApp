@@ -14,7 +14,8 @@ class PostsNew extends Component {
     };
 
     onSubmit(props) {
-      this.props.createPost(props); //we can then use a chaining on the promise
+      this.props.createPost(props) //we can then use a chaining on the promise
+        // This then is only called when a post is successfully created !
         .then(() => {
           // Blog post has been created, navigate the user to the index
           // We navigate by calling this.context.router.push with the
