@@ -24,8 +24,10 @@ class PostsIndex extends Component {
       return (
         // The id comes back from the backend
         <li className="list-group-item" key={post.id}>
-          <span className="pull-xs-right">{ post.categories }</span>
-          <strong>{ post.title }</strong>
+          <Link to={"posts/" + post.id}>
+            <span className="pull-xs-right">{ post.categories }</span>
+            <strong>{ post.title }</strong>
+          </Link>
         </li>
       )
     })
